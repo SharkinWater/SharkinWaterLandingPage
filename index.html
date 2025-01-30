@@ -21,6 +21,29 @@
     <meta name="twitter:description" content="Welcome to Sharkin Water!" />
     <meta name="twitter:image" content="https://sharkinwater.netlify.app/images/blacklogo.png" />
 
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-analytics.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+    
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyCDnykSdPw4FNp4LKhrj1IVrtYSgUgqGdI",
+        authDomain: "sharkinwater-f1a9c.firebaseapp.com",
+        projectId: "sharkinwater-f1a9c",
+        storageBucket: "sharkinwater-f1a9c.firebasestorage.app",
+        messagingSenderId: "990625786540",
+        appId: "1:990625786540:web:0d1ae289ebf9b1c3494d09",
+        measurementId: "G-1SWQN3DRRT"
+      };
+    
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+    </script>
   </head>
   <body>
     <!--Loading screen-->
