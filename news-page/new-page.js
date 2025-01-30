@@ -61,4 +61,3 @@ document.addEventListener("DOMContentLoaded", () => {
     // Hiển thị trang đầu tiên
     showPage(1);
 });
-
