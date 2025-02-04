@@ -270,12 +270,14 @@ img.taskbar_ourstory {
 footer {
   display: flex;
   background-color: rgba(0, 0, 105, 0.486);
-  bottom: 0;
+  justify-content: center;
   left: 0;
   width: 100%;
   text-align: center;
-  position: bottom;
-  z-index: 1000; /* Giá trị rất cao để luôn nằm trên */
+  text-align: center;
+  padding: 2vh 0; /* Adjust padding based on viewport height */
+  position: relative;
+  bottom: 0;
 }
 
 #loading-screen {
@@ -348,4 +350,106 @@ footer {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 20px;
+}
+
+.footer-column {
+  flex: 1 1 300px; /* Đảm bảo các cột có cùng chiều rộng */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Căn giữa các phần tử con theo chiều ngang */
+  justify-content: center; /* Căn giữa các phần tử con theo chiều dọc */
+}
+
+.footer-column p,
+.footer-column a {
+  font-size: 24px;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+}
+
+.mailto {
+  color: white;
+  margin-left: 1.5%;
+}
+/* Responsive adjustments for .footer-column a */
+@media (max-width: 1200px) {
+  .footer-column a {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 992px) {
+  .footer-column a {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-column a {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 576px) {
+  .footer-column a {
+    font-size: 13px;
+  }
+}
+
+.social-icons img {
+  width: auto;
+  height: 50px;
+  margin-left: 20px;
+  margin-bottom: 10px;
+  transition: opacity 0.3s;
+}
+
+.social-icons a:hover img {
+  opacity: 0.7;
+}
+
+.footer-logo img {
+  width: 200px;
+}
+
+.footer-logo img:hover {
+  transform: scale(1.15);
+}
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .social-icons img {
+    height: 40px;
+    margin-left: 15px;
+  }
+}
+
+@media (max-width: 992px) {
+  .social-icons img {
+    height: 40px;
+    margin-left: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .social-icons img {
+    height: 40px;
+    margin-left: 10px;
+  }
+}
+
+@media (max-width: 576px) {
+  .social-icons img {
+    height: 30px;
+    margin-left: 5px;
+  }
 }

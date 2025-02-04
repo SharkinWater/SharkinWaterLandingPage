@@ -294,31 +294,94 @@ footer.footer-ss3 {
 }
 
 .footer-column {
-  flex: 1 1 300px;
-  margin: 20px 0;
+  flex: 1 1 300px; /* Đảm bảo các cột có cùng chiều rộng */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Căn giữa các phần tử con theo chiều ngang */
+  justify-content: center; /* Căn giữa các phần tử con theo chiều dọc */
 }
 
 .footer-column p,
 .footer-column a {
-  font-size: 14px;
-  color: #f2f2f2;
+  font-size: 24px;
+  color: white;
+  text-decoration: none;
+  text-align: center;
 }
 
-.social-icons {
-  display: flex;
-  margin-top: 15px;
+.mailto {
+  color: white;
+  margin-left: 1.5%;
+}
+/* Responsive adjustments for .footer-column a */
+@media (max-width: 1200px) {
+  .footer-column a {
+    font-size: 18px;
+  }
 }
 
-.social-icons a {
-  margin-right: 10px;
+@media (max-width: 992px) {
+  .footer-column a {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-column a {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 576px) {
+  .footer-column a {
+    font-size: 13px;
+  }
 }
 
 .social-icons img {
-  width: 24px;
-  height: 24px;
+  width: auto;
+  height: 50px;
+  margin-left: 20px;
+  margin-bottom: 10px;
   transition: opacity 0.3s;
 }
 
 .social-icons a:hover img {
   opacity: 0.7;
+}
+
+.footer-logo img {
+  width: 200px;
+}
+
+.footer-logo img:hover {
+  transform: scale(1.15);
+}
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .social-icons img {
+    height: 40px;
+    margin-left: 15px;
+  }
+}
+
+@media (max-width: 992px) {
+  .social-icons img {
+    height: 40px;
+    margin-left: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .social-icons img {
+    height: 40px;
+    margin-left: 10px;
+  }
+}
+
+@media (max-width: 576px) {
+  .social-icons img {
+    height: 30px;
+    margin-left: 5px;
+  }
 }
