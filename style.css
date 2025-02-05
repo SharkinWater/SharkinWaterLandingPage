@@ -44,7 +44,7 @@ main {
 }
 
 .header {
-  height: 9vh; /* Adjust height based on viewport height */
+  height: 10vh; /* Adjust height based on viewport height */
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -74,7 +74,7 @@ main {
 .nav-links a {
   text-decoration: none;
   color: white;
-  font-size: 1.3vw; /* Adjust font size based on viewport width */
+  font-size: 1vw; /* Adjust font size based on viewport width */
   transition: color 0.3s;
 }
 
