@@ -5,7 +5,7 @@
 }
 
 body {
-  font-family: 'Ethnocentric Rg', sans-serif;
+  font-family: Arial, sans-serif;
   background-size: cover;
   background-position: center;
   overflow-x: hidden;
@@ -13,6 +13,22 @@ body {
   min-height: 100vh; /* Đảm bảo body luôn chiếm ít nhất toàn bộ chiều cao của cửa sổ */
   display: flex;
   flex-direction: column;
+}
+
+body h1 {
+  font-family: 'Ethnocentric Rg', sans-serif;
+  font-size: 50px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+body h2 {
+  font-family: 'Ethnocentric Rg', sans-serif;
+  font-size: 50px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 20px;
 }
 
 .header-ss1 {
@@ -28,6 +44,7 @@ body {
 }
 
 header {
+  
   height: 9vh; /* Adjust height based on viewport height */
   position: sticky;
   top: 0;
@@ -65,6 +82,7 @@ header {
 }
 
 .nav-links a {
+  font-family: 'Ethnocentric Rg', sans-serif;
   text-decoration: none;
   color: white;
   font-size: 1.5vw; /* Adjust font size based on viewport width */
@@ -303,38 +321,39 @@ footer.footer-ss3 {
 
 .footer-column p,
 .footer-column a {
-  font-size: 24px;
+  font-size: 13px;
   color: white;
   text-decoration: none;
   text-align: center;
 }
 
 .mailto {
+  font-family: 'Ethnocentric Rg', sans-serif;
   color: white;
   margin-left: 1.5%;
 }
 /* Responsive adjustments for .footer-column a */
 @media (max-width: 1200px) {
   .footer-column a {
-    font-size: 18px;
+    font-size: 13px;
   }
 }
 
 @media (max-width: 992px) {
   .footer-column a {
-    font-size: 18px;
+    font-size: 13px;
   }
 }
 
 @media (max-width: 768px) {
   .footer-column a {
-    font-size: 18px;
+    font-size: 11px;
   }
 }
 
 @media (max-width: 576px) {
   .footer-column a {
-    font-size: 13px;
+    font-size: 11px;
   }
 }
 
