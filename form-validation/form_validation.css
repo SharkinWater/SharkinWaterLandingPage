@@ -49,6 +49,7 @@ header {
 .nav-links a {
     text-decoration: none;
     color: white;
+    font-family: 'Ethnocentric Rg';
     font-size: 1.5vw; /* Adjust font size based on viewport width */
     transition: color 0.3s;
 }
