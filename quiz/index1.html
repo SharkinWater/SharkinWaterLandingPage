@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shark Business Quiz & Floating Coins</title>
+    <style>
+        @keyframes float {
+            from { left: -60px; opacity: 1; }
+            to { left: 100vw; opacity: 0; }
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background: linear-gradient(to bottom, #003f5c, #58508d);
+            color: white;
+            padding: 20px;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+        #quiz-container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 5%;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            max-width: 80%;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+            display: none;
+        }
+        h1 {
+            font-size: clamp(24px, 4vw, 32px);
+            margin-bottom: 15px;
+        }
+        h2 {
+            font-size: clamp(18px, 3vw, 24px);
+            margin-bottom: 20px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            background: #ff6b6b;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        button:hover {
+            background: #ff4757;
+            transform: scale(1.05);
+        }
+        .coin {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    animation: float linear infinite, spin 2s infinite linear;
+    z-index: 1; /* Đặt coin nằm sau */
+}
+
+#start-button {
+            background: #ffd700;
+            color: black;
+            padding: 10px 15px;
+            font-size: 16px;
+            border-radius: 30px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+    width: 450px; /* Giảm chiều dài của nút */
+    text-align: center; /* Căn giữa chữ bên trong */
+    position: relative;
+    z-index: 2; /* Đặt nút trên cùng */
+        }
+
+
+
+        @media (max-width: 768px) {
+            #quiz-container {
+                max-width: 90%;
+                padding: 7%;
+            }
+            .coin {
+                width: 30px;
+                height: 30px;
+            }
+            button {
+                font-size: 14px;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>🦈 Shark Business Quiz</h1>
+    <button id="start-button" onclick="startQuiz()">🌕 Bắt đầu</button>
+    <div id="quiz-container"></div>
+
+
+    <script>
+       let lastCoinTop = [];
+
+function createCoin(top, duration) {
+    // Kiểm tra khoảng cách tối thiểu giữa các đồng xu
+    let minDistance = 10; // Khoảng cách tối thiểu giữa các đồng xu (đơn vị vh)
+
+    // Nếu vị trí quá gần với đồng xu trước đó, điều chỉnh lại
+    while (lastCoinTop.some(pos => Math.abs(pos - top) < minDistance)) {
+        top = Math.random() * 90; // Điều chỉnh vị trí mới trong khoảng 0-90vh
+    }
+
+    let coin = document.createElement("img");
+    coin.src = "https://png.pngtree.com/png-clipart/20220911/original/pngtree-coin-pixel-art-illustration-suitable-for-icons-game-assets-etc-png-image_8533568.png";
+    coin.classList.add("coin");
+    coin.style.top = top + "vh";
+    coin.style.animationDuration = duration + "s";
+    document.body.appendChild(coin);
+
+    // Lưu vị trí đồng xu vừa tạo
+    lastCoinTop.push(top);
+    if (lastCoinTop.length > 10) lastCoinTop.shift(); // Giữ lại danh sách vị trí của 10 đồng xu gần nhất
+
+    setTimeout(() => {
+        coin.remove();
+        lastCoinTop = lastCoinTop.filter(pos => pos !== top); // Xóa vị trí sau khi đồng xu biến mất
+    }, duration * 1000);
+}
+        setInterval(() => {
+            createCoin(Math.random() * 100, 8 + Math.random() * 5);
+        }, 2000);
+        function startQuiz() {
+            document.getElementById("start-button").style.display = "none";
+            document.getElementById("quiz-container").style.display = "block";}
+
+
+        const questions = [
+            { question: "Khi nghĩ về kinh doanh, điều gì quan trọng nhất với bạn?", answers: [
+                { text: "Lập chiến lược dài hạn, xây dựng công ty.", points: { "Leader": 2, "Financial Analyst": 1 } },
+                { text: "Quản lý dòng tiền, đầu tư chính xác.", points: { "Financial Analyst": 2, "Leader": 1 } },
+                { text: "Sáng tạo nội dung, thu hút khách hàng.", points: { "Creative Marketer": 2, "Sales Expert": 1 } },
+                { text: "Kết nối với khách hàng, chốt đơn liên tục.", points: { "Sales Expert": 2, "Creative Marketer": 1 } }
+            ]},
+            { question: "Bạn thích làm việc theo cách nào?", answers: [
+                { text: "Lập kế hoạch và định hướng lâu dài.", points: { "Leader": 2, "Operations Expert": 1 } },
+                { text: "Phân tích số liệu và tìm ra cơ hội tài chính.", points: { "Financial Analyst": 2, "Leader": 1 } },
+                { text: "Thiết kế các chiến dịch quảng cáo sáng tạo.", points: { "Creative Marketer": 2, "Tech Innovator": 1 } },
+                { text: "Gặp gỡ khách hàng và thúc đẩy doanh số.", points: { "Sales Expert": 2, "Operations Expert": 1 } }
+            ]},
+        ];
+
+
+        let currentQuestion = 0;
+        let scores = {
+            "Leader": 0,
+            "Financial Analyst": 0,
+            "Operations Expert": 0,
+            "Tech Innovator": 0,
+            "Creative Marketer": 0,
+            "Sales Expert": 0
+        };
+
+
+        function startQuiz() {
+            document.getElementById("start-button").style.display = "none";
+            document.getElementById("quiz-container").style.display = "block";
+            showQuestion();
+        }
+
+
+        function showQuestion() {
+            if (currentQuestion < questions.length) {
+                let q = questions[currentQuestion];
+                let html = `<h2>${q.question}</h2>`;
+                q.answers.forEach((answer, index) => {
+                    html += `<button onclick="selectAnswer(${index})">${answer.text}</button>`;
+                });
+                document.getElementById("quiz-container").innerHTML = html;
+            } else {
+                showResults();
+            }
+        }
+
+
+        function selectAnswer(index) {
+            let selectedAnswer = questions[currentQuestion].answers[index];
+            for (let key in selectedAnswer.points) {
+                scores[key] += selectedAnswer.points[key];
+            }
+            currentQuestion++;
+            showQuestion();
+        }
+
+
+        function showResults() {
+            let highestScore = 0;
+            let bestCategory = "";
+            for (let key in scores) {
+                if (scores[key] > highestScore) {
+                    highestScore = scores[key];
+                    bestCategory = key;
+                }
+            }
+            document.getElementById("quiz-container").innerHTML = `Bạn phù hợp với nhóm: <strong>${bestCategory}</strong>`;
+        }
+    </script>
+</body>
+</html>
+
