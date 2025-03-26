@@ -7,11 +7,9 @@
   body {
     font-family: 'Ethnocentric Rg';
     /* background-color: #8EC5FC; */
-    background: linear-gradient(to bottom, #2c5d8b, #4a3578);
+    background: linear-gradient(to bottom, #346491, #3a2861);
 
     /* background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%); */
-
-
     min-height: 100vh; /* Ensure body always takes up at least the full height of the viewport */
     overflow-x: hidden;
     display: flex;
@@ -50,12 +48,12 @@ body::-webkit-scrollbar{
 
   .border_card {
     display: grid;
+    justify-content: center;
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
     max-width: 64vw;
     height: 100vh;
     margin: auto;
-    justify-content: center;
     place-items: center;
     padding-bottom: 10px;
     transition: all 0.3s ease-in-out;
@@ -66,25 +64,28 @@ body::-webkit-scrollbar{
   display: block;
 }
 
-.border_card .card:nth-last-child(1):nth-child(3n + 1) {
-  grid-column: 2 / span 1;
-}
-
 .card {
   animation: fadeIn 0.6s ease-in-out;
   width: 25vw;
   height: 60vh;
-  background: #1A093E;
-  border: 2px solid #00FFFF;
+  background: #31416e;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
   padding: 0;
-}
 
+  position: relative;
+    border-radius: 15px;
+    color: white; 
+    /* box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1); */
+    transition: all 0.3s ease-in-out;
+    overflow: hidden;
+}
 
 .card:hover {
     box-shadow: 0px 0px 15px #00FFFF;
     transform: scale(1.05);
     cursor: pointer;
 }
+
 
 .card-text{
   font-size: 1.2vw;
@@ -97,7 +98,6 @@ body::-webkit-scrollbar{
   margin: auto;
   width: 90%; 
   height: 70%;
-  /* object-fit: contain; */
 }
 
 @media (max-width: 768px) {
@@ -544,7 +544,13 @@ body::-webkit-scrollbar{
       height: 30px;
       margin-left: 5px;
     }
+  }
+
+  @media (max-width: 768px){
     .border_card .card:nth-last-child(1):nth-child(2n + 1) {
-      grid-column: 1 / span 1;
+      grid-column: span 2;
+    }
+    .border_card{
+      height: 135vh;
     }
   }
