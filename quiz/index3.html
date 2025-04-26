@@ -157,47 +157,46 @@ function createCoin(top, duration) {
 
 
             const questions = [
-            { question: "Điều bạn ưu tiên nhất khi làm việc nhóm là gì?", answers: [
-                { text: "Kết quả cuối cùng.", points: { "hightask shortpeople": 1, "shorttask highpeople": 1, "Balancer": 1,"All high": 1 } },
-                { text: "Không khí, cảm xúc nhóm.", points: { "hightask shortpeople": 2, "shorttask highpeople": 2, "Balancer": 2,"All high": 2  } },
-                { text: "Cân bằng cả 2.", points: { "hightask shortpeople": 3 , "shorttask highpeople": 3 , "Balancer": 3 ,"All high": 3 } },
-                { text: "D. Vừa hiệu suất cao vừa có sự gắn kết với nhau.", points: { "hightask shortpeople": 4, "shorttask highpeople": 4, "Balancer": 4 ,"All high": 4 } },
+            { question: "Bạn nghĩ người lãnh đạo lý tưởng là người như thế nào?", answers: [
+             { text: "Để team tự do, không quản nhiều.", points: { "hightask shortpeople": 1, "shorttask highpeople": 1, "Balancer": 1, "All high": 1 } },
+             { text: "Kỷ luật chặt chẽ, ưu tiên kết quả.", points: { "hightask shortpeople": 2, "shorttask highpeople": 2, "Balancer": 2, "All high": 2 } },
+                { text: "Tâm lý, quan tâm từng người.", points: { "hightask shortpeople": 3, "shorttask highpeople": 3, "Balancer": 3, "All high": 3 } },
+             { text: "Biết cân bằng cả hiệu quả và cảm xúc nhóm.", points: { "hightask shortpeople": 4, "shorttask highpeople": 4, "Balancer": 4, "All high": 4 } },
             ]},
-            { question: "Một thành viên trong team bị ốm đúng dịp dự án ở giai đoạn nước rút, bạn sẽ làm gì?", answers: [
-                { text: "Vẫn yêu cầu bạn ấy cố hoàn thành", points: { "hightask shortpeople": 1, "shorttask highpeople": 1, "Balancer": 1,"All high": 1 } },
-                { text: "Cho nghỉ hoàn toàn, không trách móc", points: { "hightask shortpeople": 2, "shorttask highpeople": 2, "Balancer": 2,"All high": 2  } },
-                { text: "Chia sẻ lại công việc và hỗ trợ bạn ấy", points: { "hightask shortpeople": 3 , "shorttask highpeople": 3 , "Balancer": 3 ,"All high": 3 } },
-                { text: "Tìm phương án vừa giảm tải vừa hỗ trợ bạn hồi phục", points: { "hightask shortpeople": 4, "shorttask highpeople": 4, "Balancer": 4 ,"All high": 4 } },
+
+            { question: "Phong cách bạn muốn khi đi làm là gì?", answers: [
+            { text: "Ít áp lực, tự do.", points: { "hightask shortpeople": 1, "shorttask highpeople": 1, "Balancer": 1, "All high": 1 } },
+            { text: "Chuyên nghiệp, khắt khe.", points: { "hightask shortpeople": 2, "shorttask highpeople": 2, "Balancer": 2, "All high": 2 } },
+            { text: "Thoải mái, nhân văn.", points: { "hightask shortpeople": 3, "shorttask highpeople": 3, "Balancer": 3, "All high": 3 } },
+            { text: "Có định hướng và kết nối.", points: { "hightask shortpeople": 4, "shorttask highpeople": 4, "Balancer": 4, "All high": 4 } },
             ]},
-            { question: "Lịch làm việc nhóm của bạn thường thường có xu hướng nào?", answers: [
-                { text: "Chặt chẽ, đúng giờ, hiệu quả", points: { "hightask shortpeople": 1, "shorttask highpeople": 1, "Balancer": 1,"All high": 1 } },
-                { text: "Linh hoạt theo tinh thần của nhóm", points: { "hightask shortpeople": 2, "shorttask highpeople": 2, "Balancer": 2,"All high": 2  } },
-                { text: "Có plan rõ nhưng có thể thay đổi nhẹ", points: { "hightask shortpeople": 3 , "shorttask highpeople": 3 , "Balancer": 3 ,"All high": 3 } },
-                { text: "Rõ ràng nhưng luôn quan tâm tình hình cảm xúc nhóm", points: { "hightask shortpeople": 4, "shorttask highpeople": 4, "Balancer": 4 ,"All high": 4 } },
+
+            { question: "Một thành viên làm sai, bạn sẽ làm gì?", answers: [
+            { text: "Bỏ qua.", points: { "hightask shortpeople": 1, "shorttask highpeople": 1, "Balancer": 1, "All high": 1 } },
+            { text: "Phê bình công khai.", points: { "hightask shortpeople": 2, "shorttask highpeople": 2, "Balancer": 2, "All high": 2 } },
+             { text: "Động viên riêng tư.", points: { "hightask shortpeople": 3, "shorttask highpeople": 3, "Balancer": 3, "All high": 3 } },
+            { text: "Góp ý và hỗ trợ cải thiện.", points: { "hightask shortpeople": 4, "shorttask highpeople": 4, "Balancer": 4, "All high": 4 } },
             ]},
-            { question: "Bạn xử lý gì khi một thành viên làm việc kém?", answers: [
-                { text: "Nhắc nhở, sửa lỗi ngay", points: { "hightask shortpeople": 1, "shorttask highpeople": 1, "Balancer": 1,"All high": 1 } },
-                { text: "Tâm sự để hiểu lý do trước (cá nhân với nhau)", points: { "hightask shortpeople": 2, "shorttask highpeople": 2, "Balancer": 2,"All high": 2  } },
-                { text: "Góp ý nhẹ nhàng qua các buổi team (công khai)", points: { "hightask shortpeople": 3 , "shorttask highpeople": 3 , "Balancer": 3 ,"All high": 3 } },
-                { text: "Kết hợp cả góp ý và hỗ trợ cá nhân hóa", points: { "hightask shortpeople": 4, "shorttask highpeople": 4, "Balancer": 4 ,"All high": 4 } },
+
+            { question: "Khi nhóm thành công, bạn:", answers: [
+            { text: "Không phản ứng gì nhiều.", points: { "hightask shortpeople": 1, "shorttask highpeople": 1, "Balancer": 1, "All high": 1, "Team management":1 } },
+            { text: "Giao thêm việc mới ngay.", points: { "hightask shortpeople": 2, "shorttask highpeople": 2, "Balancer": 2, "All high": 2, "Team management":2 } },
+            { text: "Ăn mừng cùng nhóm.", points: { "hightask shortpeople": 3, "shorttask highpeople": 3, "Balancer": 3, "All high": 3, "Team management":3 } },
+            { text: "Khen thưởng + tổng kết rút kinh nghiệm.", points: { "hightask shortpeople": 4, "shorttask highpeople": 4, "Balancer": 4, "All high": 4, "Team management":4  } },
             ]},
-            { question: "Bạn nghĩ một buổi làm việc hiệu quả là khi:", answers: [
-                { text: "Hoàn thành đúng KPI", points: { "hightask shortpeople": 1, "shorttask highpeople": 1, "Balancer": 1,"All high": 1 } },
-                { text: "Mọi người vui vẻ", points: { "hightask shortpeople": 2, "shorttask highpeople": 2, "Balancer": 2,"All high": 2  } },
-                { text: "Có kết quả và không khí tích cực", points: { "hightask shortpeople": 3 , "shorttask highpeople": 3 , "Balancer": 3 ,"All high": 3 } },
-                { text: "Tối ưu năng suất và sự phát triển từng người", points: { "hightask shortpeople": 4, "shorttask highpeople": 4, "Balancer": 4 ,"All high": 4 } },
+
+            { question: "Khi nhóm làm việc kém bạn sẽ làm gì?", answers: [
+            { text: "Mặc kệ và để thành viên tự chịu trách nhiệm.", points: { "hightask shortpeople": 1, "shorttask highpeople": 1, "Balancer": 1, "All high": 1, "Team management":1  } },
+            { text: "Ép buộc tiến độ.", points: { "hightask shortpeople": 2, "shorttask highpeople": 2, "Balancer": 2, "All high": 2, "Team management":2  } },
+            { text: "Tìm hiểu lý do, động viên.", points: { "hightask shortpeople": 3, "shorttask highpeople": 3, "Balancer": 3, "All high": 3, "Team management":3 } },
+            { text: "Giao lại kế hoạch mới phù hợp định hướng, giải quyết tận gốc vấn đề.", points: { "hightask shortpeople": 4, "shorttask highpeople": 4, "Balancer": 4, "All high": 4, "Team management":4  } },
             ]},
-            { question: "Khi giao việc, bạn thường:", answers: [
-                { text: "Giao theo deadline và độ khó", points: { "hightask shortpeople": 1, "shorttask highpeople": 1, "Balancer": 1,"All high": 1 } },
-                { text: "Giao theo sở thích cá nhân", points: { "hightask shortpeople": 2, "shorttask highpeople": 2, "Balancer": 2,"All high": 2  } },
-                { text: "Giao theo năng lực từng người", points: { "hightask shortpeople": 3 , "shorttask highpeople": 3 , "Balancer": 3 ,"All high": 3 } },
-                { text: "Giao hợp lý giữa chuyên môn và cảm xúc", points: { "hightask shortpeople": 4, "shorttask highpeople": 4, "Balancer": 4 ,"All high": 4 } },
-            ]},
-            { question: "Cách bạn thể hiện vai trò lãnh đạo:", answers: [
-                { text: "Điều phối tiến độ", points: { "hightask shortpeople": 1, "shorttask highpeople": 1, "Balancer": 1,"All high": 1 } },
-                { text: "Lắng nghe, gắn kết", points: { "hightask shortpeople": 2, "shorttask highpeople": 2, "Balancer": 2,"All high": 2  } },
-                { text: "Quản lý nhẹ nhàng", points: { "hightask shortpeople": 3 , "shorttask highpeople": 3 , "Balancer": 3 ,"All high": 3 } },
-                { text: "Vừa hiệu quả, vừa nuôi dưỡng", points: { "hightask shortpeople": 4, "shorttask highpeople": 4, "Balancer": 4 ,"All high": 4 } },
+
+            { question: "Điều bạn mong muốn từ một nhóm lý tưởng:", answers: [
+            { text: "Không ai làm phiền tôi.", points: { "hightask shortpeople": 1, "shorttask highpeople": 1, "Balancer": 1, "All high": 1, "Team management":1 } },
+            { text: "Mọi người luôn đạt chỉ tiêu.", points: { "hightask shortpeople": 2, "shorttask highpeople": 2, "Balancer": 2, "All high": 2, "Team management":2 } },
+            { text: "Làm việc vui vẻ, thân thiện.", points: { "hightask shortpeople": 3, "shorttask highpeople": 3, "Balancer": 3, "All high": 3, "Team management":3 } },
+            { text: "Gắn bó, hiệu suất cao và học hỏi lẫn nhau.", points: { "hightask shortpeople": 4, "shorttask highpeople": 4, "Balancer": 4, "All high": 4, "Team management":4 } },
             ]},
         ];
 let currentQuestion = 0;
@@ -206,6 +205,7 @@ let scores = {
     "shorttask highpeople": 0,
     "Balancer": 0,
     "All high":0,
+    "Team management":0
 };
 
 function startQuiz() {
@@ -244,14 +244,16 @@ function showResults() {
     const shorttaskhighpeopleScore = scores["shorttask highpeople"];
     const BalancerScore = scores["Balancer"];
     const AllhighScore = scores["All high"];
+    const TeammanagementScore = scores["Team management"];
 
 
-    if (hightaskshortpeopleScore >= 7 && hightaskshortpeopleScore<= 11) {
-    resultText = "Task cao - People thấp";
+
+    if (hightaskshortpeopleScore >= 6 && hightaskshortpeopleScore<= 10 ) {
+    resultText = "Phong cách 1.1 Lãnh đạo vô tâm (Impoverished management)";
     details = `
 <div class="category-details" style="margin-top: 20px; font-family: 'Orbitron', sans-serif; color: #e0f7fa; text-align: left;">
     <strong>Điểm tổng:</strong> ${hightaskshortpeopleScore} điểm<br>
-    <strong>Đặc điểm:</strong> Tập trung chủ yếu vào kết quả công việc mà ít quan tâm đến mối quan hệ trong nhóm.
+    <strong>Đặc điểm:</strong> Không chú trọng đến công việc cũng không quan tâm đến con người.
     <div style="
         width: 100%;
         margin-top: 20px;
@@ -272,16 +274,16 @@ function showResults() {
                 <tr>
                     <td style="padding: 16px; border-right: 1px solid #00f0ff;">
                         <ul style="padding-left: 20px; margin: 0;">
-                            <li>Đảm bảo tiến độ công việc được hoàn thành đúng hạn.</li>
-                            <li>Mọi thành viên đều biết rõ nhiệm vụ của mình.</li>
-                            <li>Môi trường làm việc rõ ràng, ít sự phiền toái cá nhân.</li>
+                            <li>Để nhóm tự chủ hoàn toàn, không can thiệp sâu.</li>
+                            <li>Giảm áp lực cho người lãnh đạo và thành viên.</li>
                         </ul>
                     </td>
                     <td style="padding: 16px;">
                         <ul style="padding-left: 20px; margin: 0;">
-                            <li>Mối quan hệ giữa các thành viên trong nhóm có thể bị căng thẳng.</li>
-                            <li>Khó duy trì động lực và sự hài lòng trong công việc lâu dài.</li>
-                            <li>Thiếu sự hỗ trợ lẫn nhau, ảnh hưởng đến sức khỏe tinh thần của nhân viên.</li>
+                            <li>Thiếu định hướng, nhóm dễ mất mục tiêu.</li>
+                            <li>Không tạo ra động lực làm việc hay sự kết nối nội bộ.</li>
+                            <li>Dễ khiến hiệu suất giảm sút nghiêm trọng.</li>
+                          <li>Không phù hợp trong môi trường cần sự gắn kết hoặc hiệu quả cao.</li>
                         </ul>
                     </td>
                 </tr>
@@ -289,12 +291,12 @@ function showResults() {
         </table>
     </div>
 </div>`;
-} else if (shorttaskhighpeopleScore >= 12 && shorttaskhighpeopleScore <= 16) {
-    resultText = "Task thấp - People cao";
+} else if (shorttaskhighpeopleScore >= 11  && shorttaskhighpeopleScore <= 13 ) {
+    resultText = "Lãnh đạo chuyên quyền (Authority-compliance management)";
     details = `
 <div class="category-details" style="margin-top: 20px; font-family: 'Orbitron', sans-serif; color: #e0f7fa; text-align: left;">
     <strong>Điểm tổng:</strong> ${shorttaskhighpeopleScore} điểm<br>
-    <strong>Đặc điểm:</strong> Đặt mối quan hệ và cảm xúc của các thành viên lên trên kết quả công việc.
+    <strong>Đặc điểm:</strong> Chú trọng tối đa vào hiệu quả công việc, coi nhẹ yếu tố con người.
     <div style="
         width: 100%;
         margin-top: 20px;
@@ -315,16 +317,16 @@ function showResults() {
                 <tr>
                     <td style="padding: 16px; border-right: 1px solid #00f0ff;">
                         <ul style="padding-left: 20px; margin: 0;">
-                            <li>Môi trường làm việc hòa đồng và thân thiện.</li>
-                            <li>Các thành viên cảm thấy thoải mái và dễ dàng giao tiếp.</li>
-                            <li>Dễ dàng xây dựng được sự gắn kết trong nhóm.</li>
+                            <li>Nâng cao hiệu suất và tốc độ hoàn thành nhiệm vụ.</li>
+                            <li>Đảm bảo nhóm đạt chỉ tiêu, tiến độ rõ ràng.</li>
+                            <li>Phù hợp với môi trường làm việc có cấu trúc chặt chẽ, áp lực cao.</li>
                         </ul>
                     </td>
                     <td style="padding: 16px;">
                         <ul style="padding-left: 20px; margin: 0;">
-                            <li>Công việc có thể không hoàn thành đúng hạn.</li>
-                            <li>Kết quả không rõ ràng hoặc thiếu hiệu quả.</li>
-                            <li>Mất sự cân bằng giữa sự hài lòng cá nhân và yêu cầu công việc.</li>
+                            <li>Gây căng thẳng và dễ khiến thành viên kiệt sức hoặc mất động lực.</li>
+                            <li>Thiếu sự lắng nghe và tôn trọng cảm xúc cá nhân.</li>
+                            <li>Có thể dẫn đến xung đột và rạn nứt nội bộ nếu duy trì lâu dài.</li>
                         </ul>
                     </td>
                 </tr>
@@ -332,12 +334,12 @@ function showResults() {
         </table>
     </div>
 </div>`;
-} else if (BalancerScore >= 17 && BalancerScore <= 21) {
-    resultText = "Task - People cân bằng";
+} else if (BalancerScore >= 14 && BalancerScore <= 16 ) {
+    resultText = "Phong cách 9.1 Lãnh đạo xã hội (Country club management)";
     details = `
 <div class="category-details" style="margin-top: 20px; font-family: 'Orbitron', sans-serif; color: #e0f7fa; text-align: left;">
     <strong>Điểm tổng:</strong> ${BalancerScore} điểm<br>
-    <strong>Đặc điểm:</strong> Cân bằng giữa kết quả công việc và mối quan hệ giữa các thành viên trong nhóm.
+    <strong>Đặc điểm:</strong> Quan tâm sâu sắc đến con người, xem nhẹ khía cạnh công việc.
     <div style="
         width: 100%;
         margin-top: 20px;
@@ -358,16 +360,16 @@ function showResults() {
                 <tr>
                     <td style="padding: 16px; border-right: 1px solid #00f0ff;">
                         <ul style="padding-left: 20px; margin: 0;">
-                            <li>Cả hiệu quả công việc và sự hài lòng của nhân viên đều được chú trọng.</li>
-                            <li>Có thể hoàn thành công việc đúng hạn và vẫn duy trì được không khí làm việc tích cực.</li>
-                            <li>Các thành viên dễ dàng hỗ trợ nhau, giảm căng thẳng trong công việc.</li>
+                            <li>Tạo môi trường làm việc thoải mái, thân thiện.</li>
+                            <li>Xây dựng mối quan hệ gần gũi, gắn bó trong nhóm.</li>
+                            <li>Giúp thành viên cảm thấy được thấu hiểu và hỗ trợ.</li>
                         </ul>
                     </td>
                     <td style="padding: 16px;">
                         <ul style="padding-left: 20px; margin: 0;">
-                            <li>Đôi khi khó duy trì sự cân bằng giữa cả hai yếu tố.</li>
-                            <li>Quyết định có thể bị chậm do phải xem xét cả yếu tố cảm xúc và hiệu suất.</li>
-                            <li>Có thể gặp khó khăn khi nhóm đối mặt với áp lực công việc.</li>
+                            <li>Dễ dẫn đến thiếu kỷ luật và hiệu suất làm việc thấp.</li>
+                            <li>Không đảm bảo tiến độ và chất lượng công việc khi thiếu kiểm soát.</li>
+                            <li>Lạm dụng sự cảm thông có thể làm giảm năng lực tổ chức.</li>
                         </ul>
                     </td>
                 </tr>
@@ -375,12 +377,12 @@ function showResults() {
         </table>
     </div>
 </div>`;
-} else if (AllhighScore >= 22 && AllhighScore <= 28) {
-    resultText = "Task cao - People cao.";
+} else if (AllhighScore >= 17  && AllhighScore <= 20 ) {
+    resultText = "Phong cách 5.5 Lãnh đạo cân bằng (Middle-of-the-road management)";
     details = `
 <div class="category-details" style="margin-top: 20px; font-family: 'Orbitron', sans-serif; color: #e0f7fa; text-align: left;">
     <strong>Điểm tổng:</strong> ${AllhighScore} điểm<br>
-    <strong>Đặc điểm:</strong> Mục tiêu công việc và mối quan hệ trong nhóm đều được ưu tiên cao.
+    <strong>Đặc điểm:</strong> Cân bằng mức trung bình giữa hiệu quả công việc và quan tâm con người.
     <div style="
         width: 100%;
         margin-top: 20px;
@@ -401,16 +403,59 @@ function showResults() {
                 <tr>
                     <td style="padding: 16px; border-right: 1px solid #00f0ff;">
                         <ul style="padding-left: 20px; margin: 0;">
-                            <li>Đảm bảo hiệu suất làm việc tối ưu và môi trường làm việc tích cực.</li>
-                            <li>Các thành viên trong nhóm có thể hoàn thành công việc xuất sắc và vẫn cảm thấy hài lòng.</li>
-                            <li>Tạo ra sự gắn kết lâu dài giữa các thành viên, nâng cao sự hợp tác.</li>
+                            <li>Đảm bảo nhóm vận hành ổn định, không căng thẳng quá mức.</li>
+                            <li>Giữ được sự hài hòa, không có xung đột nghiêm trọng.</li>
+                            <li>Dễ áp dụng trong các tổ chức có cơ cấu ổn định.</li>
                         </ul>
                     </td>
                     <td style="padding: 16px;">
                         <ul style="padding-left: 20px; margin: 0;">
-                            <li>Cần nhiều thời gian và năng lượng để duy trì cả hai yếu tố.</li>
-                            <li>Quản lý đôi khi phải đưa ra quyết định khó khăn giữa hiệu suất và sự hài lòng của nhóm.</li>
-                            <li>Dễ gây ra sự mệt mỏi hoặc căng thẳng nếu không cân đối hợp lý giữa công việc và mối quan hệ.</li>
+                            <li>Thiếu sự đột phá trong kết quả.</li>
+                            <li>Không tối ưu hóa tiềm năng con người hay công việc.</li>
+                            <li>Có thể tạo cảm giác “an toàn giả” khiến nhóm không tiến bộ.</li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>`;
+} else if (TeammanagementScore >= 21 && TeammanagementScore <= 24  ) {
+    resultText = "Phong cách 9.9 Lãnh đạo lý tưởng (Team management)";
+    details = `
+<div class="category-details" style="margin-top: 20px; font-family: 'Orbitron', sans-serif; color: #e0f7fa; text-align: left;">
+    <strong>Điểm tổng:</strong> ${TeammanagementScore} điểm<br>
+    <strong>Đặc điểm:</strong> Kết hợp hiệu quả cao về công việc và mức độ quan tâm cao đến con người.
+    <div style="
+        width: 100%;
+        margin-top: 20px;
+        background: linear-gradient(135deg, #1b2735, #090a0f);
+        border: 2px solid #00f0ff;
+        border-radius: 5px 20px 5px 20px;
+        box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+        overflow: hidden;
+    ">
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr style="background-color: #29b6f6; color: #002b36;">
+                    <th style="padding: 16px; text-align: center; border-right: 1px solid #00f0ff; width: 50%;">Ưu điểm</th>
+                    <th style="padding: 16px; text-align: center; width: 50%;">Nhược điểm</th>
+                </tr>
+            </thead>
+            <tbody style="background-color: rgba(255, 255, 255, 0.05);">
+                <tr>
+                    <td style="padding: 16px; border-right: 1px solid #00f0ff;">
+                        <ul style="padding-left: 20px; margin: 0;">
+                            <li>Tối ưu cả năng suất và sự phát triển cá nhân.</li>
+                            <li>Xây dựng đội ngũ bền vững, gắn kết và chủ động.</li>
+                            <li>Tạo điều kiện cho sáng tạo, học hỏi và đổi mới liên tục.</li>
+                        </ul>
+                    </td>
+                    <td style="padding: 16px;">
+                        <ul style="padding-left: 20px; margin: 0;">
+                            <li>Yêu cầu cao về kỹ năng lãnh đạo, quản trị cảm xúc và chiến lược.</li>
+                            <li>Tốn thời gian để xây dựng và duy trì hệ thống hoạt động hiệu quả.</li>
+                            <li>Phụ thuộc vào sự hợp tác chủ động từ tất cả thành viên trong nhóm.</li>
                         </ul>
                     </td>
                 </tr>
