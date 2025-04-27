@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shark Business Quiz & Floating Coins</title>
+    <style>
+        @keyframes float {
+            from { left: -60px; opacity: 1; }
+            to { left: 100vw; opacity: 0; }
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background: linear-gradient(to bottom, #003f5c, #58508d);
+            color: white;
+            padding: 20px;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+        #quiz-container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 5%;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            max-width: 80%;
+            width: 50%;
+            position: relative;
+            z-index: 2;
+            display: none;
+        }
+        h1 {
+            font-size: clamp(24px, 4vw, 32px);
+            margin-bottom: 15px;
+        }
+        h2 {
+            font-size: clamp(18px, 3vw, 24px);
+            margin-bottom: 20px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            background: #ff4757;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+
+        }
+        button:hover {
+            background: #ff4757;
+            transform: scale(1.05);
+        }
+        .coin {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    animation: float linear infinite, spin 2s infinite linear;
+    z-index: 1; /* Đặt coin nằm sau */
+}
+
+#start-button {
+            background: #ffd700;
+            color: black;
+            padding: 10px 15px;
+            font-size: 16px;
+            border-radius: 30px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+    width: 450px; /* Giảm chiều dài của nút */
+    text-align: center; /* Căn giữa chữ bên trong */
+    position: relative;
+    z-index: 2; /* Đặt nút trên cùng */
+        }
+
+
+
+        @media (max-width: 768px) {
+            #quiz-container {
+                max-width: 90%;
+                padding: 7%;
+            }
+            .coin {
+                width: 30px;
+                height: 30px;
+            }
+            button {
+                font-size: 14px;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>🦈 Shark Business Quiz</h1>
+    <button id="start-button" onclick="startQuiz()">🌕 Bắt đầu</button>
+    <div id="quiz-container"></div>
+
+
+    <script>
+       let lastCoinTop = [];
+
+
+function createCoin(top, duration) {
+    // Kiểm tra khoảng cách tối thiểu giữa các đồng xu
+    let minDistance = 10; // Khoảng cách tối thiểu giữa các đồng xu (đơn vị vh)
+
+    // Nếu vị trí quá gần với đồng xu trước đó, điều chỉnh lại
+    while (lastCoinTop.some(pos => Math.abs(pos - top) < minDistance)) {
+        top = Math.random() * 90; // Điều chỉnh vị trí mới trong khoảng 0-90vh
+    }
+
+    let coin = document.createElement("img");
+    coin.src = "https://png.pngtree.com/png-clipart/20220911/original/pngtree-coin-pixel-art-illustration-suitable-for-icons-game-assets-etc-png-image_8533568.png";
+    coin.classList.add("coin");
+    coin.style.position = "absolute";
+    coin.style.width = "60px"; // Tăng kích thước chiều rộng
+    coin.style.height = "60px"; // Tăng kích thước chiều cao
+    coin.style.animation = "float linear infinite, spin 2s infinite linear";
+    coin.style.zIndex = "1";
+    coin.style.top = top + "vh";
+    coin.style.animationDuration = duration + "s";
+    document.body.appendChild(coin);
+
+    // Lưu vị trí đồng xu vừa tạo
+    lastCoinTop.push(top);
+    if (lastCoinTop.length > 10) lastCoinTop.shift(); // Giữ lại danh sách vị trí của 10 đồng xu gần nhất
+
+    setTimeout(() => {
+        coin.remove();
+        lastCoinTop = lastCoinTop.filter(pos => pos !== top); // Xóa vị trí sau khi đồng xu biến mất
+    }, duration * 1000);
+}
+        setInterval(() => {
+            createCoin(Math.random() * 100, 8 + Math.random() * 5);
+        }, 2000);
+        function startQuiz() {
+            document.getElementById("start-button").style.display = "none";
+            document.getElementById("quiz-container").style.display = "block";}
+
+
+            const questions = [
+            { question: "Điều bạn ưu tiên nhất khi làm việc nhóm là gì?", answers: [
+                { text: "A. Kết quả cuối cùng.", points: { "hightask shortpeople": 1, "shorttask highpeople": 1, "Balancer": 1,"All high": 1 } },
+                { text: "B. Không khí, cảm xúc nhóm.", points: { "hightask shortpeople": 2, "shorttask highpeople": 2, "Balancer": 2,"All high": 2  } },
+                { text: "C. Cân bằng cả 2.", points: { "hightask shortpeople": 3 , "shorttask highpeople": 3 , "Balancer": 3 ,"All high": 3 } },
+                { text: "D. Vừa hiệu suất cao vừa có sự gắn kết với nhau.", points: { "hightask shortpeople": 4, "shorttask highpeople": 4, "Balancer": 4 ,"All high": 4 } },
+            ]},
+            { question: "Một thành viên trong team bị ốm đúng dịp dự án ở giai đoạn nước rút, bạn sẽ làm gì?", answers: [
+                { text: "A. Vẫn yêu cầu bạn ấy cố hoàn thành", points: { "hightask shortpeople": 1, "shorttask highpeople": 1, "Balancer": 1,"All high": 1 } },
+                { text: "B. Cho nghỉ hoàn toàn, không trách móc", points: { "hightask shortpeople": 2, "shorttask highpeople": 2, "Balancer": 2,"All high": 2  } },
+                { text: "C. Chia sẻ lại công việc và hỗ trợ bạn ấy", points: { "hightask shortpeople": 3 , "shorttask highpeople": 3 , "Balancer": 3 ,"All high": 3 } },
+                { text: "D. Tìm phương án vừa giảm tải vừa hỗ trợ bạn hồi phục", points: { "hightask shortpeople": 4, "shorttask highpeople": 4, "Balancer": 4 ,"All high": 4 } },
+            ]},
+            { question: "Lịch làm việc nhóm của bạn thường thường có xu hướng nào?", answers: [
+                { text: "A. Chặt chẽ, đúng giờ, hiệu quả", points: { "hightask shortpeople": 1, "shorttask highpeople": 1, "Balancer": 1,"All high": 1 } },
+                { text: "B. Linh hoạt theo tinh thần của nhóm", points: { "hightask shortpeople": 2, "shorttask highpeople": 2, "Balancer": 2,"All high": 2  } },
+                { text: "C. Có plan rõ nhưng có thể thay đổi nhẹ", points: { "hightask shortpeople": 3 , "shorttask highpeople": 3 , "Balancer": 3 ,"All high": 3 } },
+                { text: "D. Rõ ràng nhưng luôn quan tâm tình hình cảm xúc nhóm", points: { "hightask shortpeople": 4, "shorttask highpeople": 4, "Balancer": 4 ,"All high": 4 } },
+            ]},
+            { question: "Bạn xử lý gì khi một thành viên làm việc kém?", answers: [
+                { text: "A. Nhắc nhở, sửa lỗi ngay", points: { "hightask shortpeople": 1, "shorttask highpeople": 1, "Balancer": 1,"All high": 1 } },
+                { text: "B. Tâm sự để hiểu lý do trước (cá nhân với nhau)", points: { "hightask shortpeople": 2, "shorttask highpeople": 2, "Balancer": 2,"All high": 2  } },
+                { text: "C. Góp ý nhẹ nhàng qua các buổi team (công khai)", points: { "hightask shortpeople": 3 , "shorttask highpeople": 3 , "Balancer": 3 ,"All high": 3 } },
+                { text: "D. Kết hợp cả góp ý và hỗ trợ cá nhân hóa", points: { "hightask shortpeople": 4, "shorttask highpeople": 4, "Balancer": 4 ,"All high": 4 } },
+            ]},
+            { question: "Bạn nghĩ một buổi làm việc hiệu quả là khi:", answers: [
+                { text: "A. Hoàn thành đúng KPI", points: { "hightask shortpeople": 1, "shorttask highpeople": 1, "Balancer": 1,"All high": 1 } },
+                { text: "B. Mọi người vui vẻ", points: { "hightask shortpeople": 2, "shorttask highpeople": 2, "Balancer": 2,"All high": 2  } },
+                { text: "C. Có kết quả và không khí tích cực", points: { "hightask shortpeople": 3 , "shorttask highpeople": 3 , "Balancer": 3 ,"All high": 3 } },
+                { text: "D. Tối ưu năng suất và sự phát triển từng người", points: { "hightask shortpeople": 4, "shorttask highpeople": 4, "Balancer": 4 ,"All high": 4 } },
+            ]},
+            { question: "Khi giao việc, bạn thường:", answers: [
+                { text: "A. Giao theo deadline và độ khó", points: { "hightask shortpeople": 1, "shorttask highpeople": 1, "Balancer": 1,"All high": 1 } },
+                { text: "B. Giao theo sở thích cá nhân", points: { "hightask shortpeople": 2, "shorttask highpeople": 2, "Balancer": 2,"All high": 2  } },
+                { text: "C. Giao theo năng lực từng người", points: { "hightask shortpeople": 3 , "shorttask highpeople": 3 , "Balancer": 3 ,"All high": 3 } },
+                { text: "D. Giao hợp lý giữa chuyên môn và cảm xúc", points: { "hightask shortpeople": 4, "shorttask highpeople": 4, "Balancer": 4 ,"All high": 4 } },
+            ]},
+            { question: "Cách bạn thể hiện vai trò lãnh đạo:", answers: [
+                { text: "A. Điều phối tiến độ", points: { "hightask shortpeople": 1, "shorttask highpeople": 1, "Balancer": 1,"All high": 1 } },
+                { text: "B. Lắng nghe, gắn kết", points: { "hightask shortpeople": 2, "shorttask highpeople": 2, "Balancer": 2,"All high": 2  } },
+                { text: "C. Quản lý nhẹ nhàng", points: { "hightask shortpeople": 3 , "shorttask highpeople": 3 , "Balancer": 3 ,"All high": 3 } },
+                { text: "D. Vừa hiệu quả, vừa nuôi dưỡng", points: { "hightask shortpeople": 4, "shorttask highpeople": 4, "Balancer": 4 ,"All high": 4 } },
+            ]},
+        ];
+let currentQuestion = 0;
+let scores = {
+    "hightask shortpeople": 0,
+    "shorttask highpeople": 0,
+    "Balancer": 0,
+    "All high":0,
+};
+
+function startQuiz() {
+    document.getElementById("start-button").style.display = "none";
+    document.getElementById("quiz-container").style.display = "block";
+    showQuestion();
+}
+
+function showQuestion() {
+    if (currentQuestion < questions.length) {
+        const q = questions[currentQuestion];
+        let html = `<h2 style="text-align: left;">${q.question}</h2>`;
+        q.answers.forEach((answer, index) => {
+            html += `<button onclick="selectAnswer(${index})">${answer.text}</button>`;
+        });
+        document.getElementById("quiz-container").innerHTML = html;
+    } else {
+        showResults();
+    }
+}
+
+function selectAnswer(selectedAnswerIndex) {
+    const selectedAnswer = questions[currentQuestion].answers[selectedAnswerIndex];
+    for (const style in selectedAnswer.points) {
+        scores[style] += selectedAnswer.points[style];
+    }
+    currentQuestion++;
+    showQuestion();
+}
+
+function showResults() {
+    let resultText = "";
+    let details = "";
+
+    const hightaskshortpeopleScore = scores["hightask shortpeople"];
+    const shorttaskhighpeopleScore = scores["shorttask highpeople"];
+    const BalancerScore = scores["Balancer"];
+    const AllhighScore = scores["All high"];
+
+
+    if (hightaskshortpeopleScore >= 7 && hightaskshortpeopleScore<= 11) {
+    resultText = "Task cao - People thấp";
+    details = `
+<div class="category-details" style="margin-top: 20px; font-family: 'Orbitron', sans-serif; color: #e0f7fa; text-align: left;">
+    <strong>Điểm tổng:</strong> ${hightaskshortpeopleScore} điểm<br>
+    <strong>Đặc điểm:</strong> Tập trung chủ yếu vào kết quả công việc mà ít quan tâm đến mối quan hệ trong nhóm.
+    <div style="
+        width: 100%;
+        margin-top: 20px;
+        background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+        border: 2px solid #00f0ff;
+        border-radius: 20px 5px 20px 5px;
+        box-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+        overflow: hidden;
+    ">
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr style="background-color: #00bcd4; color: #003b4d;">
+                    <th style="padding: 16px; text-align: center; border-right: 1px solid #00f0ff; width: 50%;">Ưu điểm</th>
+                    <th style="padding: 16px; text-align: center; width: 50%;">Nhược điểm</th>
+                </tr>
+            </thead>
+            <tbody style="background-color: rgba(255, 255, 255, 0.05);">
+                <tr>
+                    <td style="padding: 16px; border-right: 1px solid #00f0ff;">
+                        <ul style="padding-left: 20px; margin: 0;">
+                            <li>Đảm bảo tiến độ công việc được hoàn thành đúng hạn.</li>
+                            <li>Mọi thành viên đều biết rõ nhiệm vụ của mình.</li>
+                            <li>Môi trường làm việc rõ ràng, ít sự phiền toái cá nhân.</li>
+                        </ul>
+                    </td>
+                    <td style="padding: 16px;">
+                        <ul style="padding-left: 20px; margin: 0;">
+                            <li>Mối quan hệ giữa các thành viên trong nhóm có thể bị căng thẳng.</li>
+                            <li>Khó duy trì động lực và sự hài lòng trong công việc lâu dài.</li>
+                            <li>Thiếu sự hỗ trợ lẫn nhau, ảnh hưởng đến sức khỏe tinh thần của nhân viên.</li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>`;
+} else if (shorttaskhighpeopleScore >= 12 && shorttaskhighpeopleScore <= 16) {
+    resultText = "Task thấp - People cao";
+    details = `
+<div class="category-details" style="margin-top: 20px; font-family: 'Orbitron', sans-serif; color: #e0f7fa; text-align: left;">
+    <strong>Điểm tổng:</strong> ${shorttaskhighpeopleScore} điểm<br>
+    <strong>Đặc điểm:</strong> Đặt mối quan hệ và cảm xúc của các thành viên lên trên kết quả công việc.
+    <div style="
+        width: 100%;
+        margin-top: 20px;
+        background: linear-gradient(135deg, #1b2735, #090a0f);
+        border: 2px solid #00f0ff;
+        border-radius: 5px 20px 5px 20px;
+        box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+        overflow: hidden;
+    ">
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr style="background-color: #29b6f6; color: #002b36;">
+                    <th style="padding: 16px; text-align: center; border-right: 1px solid #00f0ff; width: 50%;">Ưu điểm</th>
+                    <th style="padding: 16px; text-align: center; width: 50%;">Nhược điểm</th>
+                </tr>
+            </thead>
+            <tbody style="background-color: rgba(255, 255, 255, 0.05);">
+                <tr>
+                    <td style="padding: 16px; border-right: 1px solid #00f0ff;">
+                        <ul style="padding-left: 20px; margin: 0;">
+                            <li>Môi trường làm việc hòa đồng và thân thiện.</li>
+                            <li>Các thành viên cảm thấy thoải mái và dễ dàng giao tiếp.</li>
+                            <li>Dễ dàng xây dựng được sự gắn kết trong nhóm.</li>
+                        </ul>
+                    </td>
+                    <td style="padding: 16px;">
+                        <ul style="padding-left: 20px; margin: 0;">
+                            <li>Công việc có thể không hoàn thành đúng hạn.</li>
+                            <li>Kết quả không rõ ràng hoặc thiếu hiệu quả.</li>
+                            <li>Mất sự cân bằng giữa sự hài lòng cá nhân và yêu cầu công việc.</li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>`;
+} else if (BalancerScore >= 17 && BalancerScore <= 21) {
+    resultText = "Task - People cân bằng";
+    details = `
+<div class="category-details" style="margin-top: 20px; font-family: 'Orbitron', sans-serif; color: #e0f7fa; text-align: left;">
+    <strong>Điểm tổng:</strong> ${BalancerScore} điểm<br>
+    <strong>Đặc điểm:</strong> Cân bằng giữa kết quả công việc và mối quan hệ giữa các thành viên trong nhóm.
+    <div style="
+        width: 100%;
+        margin-top: 20px;
+        background: linear-gradient(135deg, #1b2735, #090a0f);
+        border: 2px solid #00f0ff;
+        border-radius: 5px 20px 5px 20px;
+        box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+        overflow: hidden;
+    ">
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr style="background-color: #29b6f6; color: #002b36;">
+                    <th style="padding: 16px; text-align: center; border-right: 1px solid #00f0ff; width: 50%;">Ưu điểm</th>
+                    <th style="padding: 16px; text-align: center; width: 50%;">Nhược điểm</th>
+                </tr>
+            </thead>
+            <tbody style="background-color: rgba(255, 255, 255, 0.05);">
+                <tr>
+                    <td style="padding: 16px; border-right: 1px solid #00f0ff;">
+                        <ul style="padding-left: 20px; margin: 0;">
+                            <li>Cả hiệu quả công việc và sự hài lòng của nhân viên đều được chú trọng.</li>
+                            <li>Có thể hoàn thành công việc đúng hạn và vẫn duy trì được không khí làm việc tích cực.</li>
+                            <li>Các thành viên dễ dàng hỗ trợ nhau, giảm căng thẳng trong công việc.</li>
+                        </ul>
+                    </td>
+                    <td style="padding: 16px;">
+                        <ul style="padding-left: 20px; margin: 0;">
+                            <li>Đôi khi khó duy trì sự cân bằng giữa cả hai yếu tố.</li>
+                            <li>Quyết định có thể bị chậm do phải xem xét cả yếu tố cảm xúc và hiệu suất.</li>
+                            <li>Có thể gặp khó khăn khi nhóm đối mặt với áp lực công việc.</li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>`;
+} else if (AllhighScore >= 22 && AllhighScore <= 28) {
+    resultText = "Task cao - People cao.";
+    details = `
+<div class="category-details" style="margin-top: 20px; font-family: 'Orbitron', sans-serif; color: #e0f7fa; text-align: left;">
+    <strong>Điểm tổng:</strong> ${AllhighScore} điểm<br>
+    <strong>Đặc điểm:</strong> Mục tiêu công việc và mối quan hệ trong nhóm đều được ưu tiên cao.
+    <div style="
+        width: 100%;
+        margin-top: 20px;
+        background: linear-gradient(135deg, #232526, #414345);
+        border: 2px solid #00f0ff;
+        border-radius: 20px 5px 20px 5px;
+        box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+        overflow: hidden;
+    ">
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr style="background-color: #4fc3f7; color: #003b4d;">
+                    <th style="padding: 16px; text-align: center; border-right: 1px solid #00f0ff; width: 50%;">Ưu điểm</th>
+                    <th style="padding: 16px; text-align: center; width: 50%;">Nhược điểm</th>
+                </tr>
+            </thead>
+            <tbody style="background-color: rgba(255, 255, 255, 0.05);">
+                <tr>
+                    <td style="padding: 16px; border-right: 1px solid #00f0ff;">
+                        <ul style="padding-left: 20px; margin: 0;">
+                            <li>Đảm bảo hiệu suất làm việc tối ưu và môi trường làm việc tích cực.</li>
+                            <li>Các thành viên trong nhóm có thể hoàn thành công việc xuất sắc và vẫn cảm thấy hài lòng.</li>
+                            <li>Tạo ra sự gắn kết lâu dài giữa các thành viên, nâng cao sự hợp tác.</li>
+                        </ul>
+                    </td>
+                    <td style="padding: 16px;">
+                        <ul style="padding-left: 20px; margin: 0;">
+                            <li>Cần nhiều thời gian và năng lượng để duy trì cả hai yếu tố.</li>
+                            <li>Quản lý đôi khi phải đưa ra quyết định khó khăn giữa hiệu suất và sự hài lòng của nhóm.</li>
+                            <li>Dễ gây ra sự mệt mỏi hoặc căng thẳng nếu không cân đối hợp lý giữa công việc và mối quan hệ.</li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>`;
+} else {
+    resultText = "Chưa xác định";
+    details = "<div style='color: white;'>Không đủ dữ liệu để xác định phong cách lãnh đạo của bạn.</div>";
+}
+
+document.getElementById("quiz-container").innerHTML = `
+<h2 style="font-size: 24px; font-family: 'Orbitron', sans-serif; color: #00f0ff; text-align: left;">
+Bạn phù hợp với nhóm: 
+<span style="font-weight: bold; color: #ff4757;">${resultText}</span>
+</h2>        
+${details}
+`;}
+    </script>
+</body>
+</html>

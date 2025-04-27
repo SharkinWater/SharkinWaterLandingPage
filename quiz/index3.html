@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shark Business Quiz & Floating Coins</title>
+    <style>
+        @keyframes float {
+            from { left: -60px; opacity: 1; }
+            to { left: 100vw; opacity: 0; }
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background: linear-gradient(to bottom, #003f5c, #58508d);
+            color: white;
+            padding: 20px;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+        #quiz-container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 5%;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            max-width: 80%;
+            width: 50%;
+            position: relative;
+            z-index: 2;
+            display: none;
+        }
+        h1 {
+            font-size: clamp(24px, 4vw, 32px);
+            margin-bottom: 15px;
+        }
+        h2 {
+            font-size: clamp(18px, 3vw, 24px);
+            margin-bottom: 20px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            background: #ff4757;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+
+        }
+        button:hover {
+            background: #ff4757;
+            transform: scale(1.05);
+        }
+        .coin {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    animation: float linear infinite, spin 2s infinite linear;
+    z-index: 1; /* Đặt coin nằm sau */
+}
+
+#start-button {
+            background: #ffd700;
+            color: black;
+            padding: 10px 15px;
+            font-size: 16px;
+            border-radius: 30px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+    width: 450px; /* Giảm chiều dài của nút */
+    text-align: center; /* Căn giữa chữ bên trong */
+    position: relative;
+    z-index: 2; /* Đặt nút trên cùng */
+        }
+
+
+
+        @media (max-width: 768px) {
+            #quiz-container {
+                max-width: 90%;
+                padding: 7%;
+            }
+            .coin {
+                width: 30px;
+                height: 30px;
+            }
+            button {
+                font-size: 14px;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>🦈 Shark Business Quiz</h1>
+    <button id="start-button" onclick="startQuiz()">🌕 Bắt đầu</button>
+    <div id="quiz-container"></div>
+
+
+    <script>
+       let lastCoinTop = [];
+
+
+function createCoin(top, duration) {
+    // Kiểm tra khoảng cách tối thiểu giữa các đồng xu
+    let minDistance = 10; // Khoảng cách tối thiểu giữa các đồng xu (đơn vị vh)
+
+    // Nếu vị trí quá gần với đồng xu trước đó, điều chỉnh lại
+    while (lastCoinTop.some(pos => Math.abs(pos - top) < minDistance)) {
+        top = Math.random() * 90; // Điều chỉnh vị trí mới trong khoảng 0-90vh
+    }
+
+    let coin = document.createElement("img");
+    coin.src = "https://png.pngtree.com/png-clipart/20220911/original/pngtree-coin-pixel-art-illustration-suitable-for-icons-game-assets-etc-png-image_8533568.png";
+    coin.classList.add("coin");
+    coin.style.position = "absolute";
+    coin.style.width = "60px"; // Tăng kích thước chiều rộng
+    coin.style.height = "60px"; // Tăng kích thước chiều cao
+    coin.style.animation = "float linear infinite, spin 2s infinite linear";
+    coin.style.zIndex = "1";
+    coin.style.top = top + "vh";
+    coin.style.animationDuration = duration + "s";
+    document.body.appendChild(coin);
+
+    // Lưu vị trí đồng xu vừa tạo
+    lastCoinTop.push(top);
+    if (lastCoinTop.length > 10) lastCoinTop.shift(); // Giữ lại danh sách vị trí của 10 đồng xu gần nhất
+
+    setTimeout(() => {
+        coin.remove();
+        lastCoinTop = lastCoinTop.filter(pos => pos !== top); // Xóa vị trí sau khi đồng xu biến mất
+    }, duration * 1000);
+}
+        setInterval(() => {
+            createCoin(Math.random() * 100, 8 + Math.random() * 5);
+        }, 2000);
+        function startQuiz() {
+            document.getElementById("start-button").style.display = "none";
+            document.getElementById("quiz-container").style.display = "block";}
+
+
+            const questions = [
+            { question: "Bạn nghĩ người lãnh đạo lý tưởng là người như thế nào?", answers: [
+             { text: "A. Để team tự do, không quản nhiều.", points: { "hightask shortpeople": 1, "shorttask highpeople": 1, "Balancer": 1, "All high": 1 } },
+             { text: "B. Kỷ luật chặt chẽ, ưu tiên kết quả.", points: { "hightask shortpeople": 2, "shorttask highpeople": 2, "Balancer": 2, "All high": 2 } },
+            { text: "C. Tâm lý, quan tâm từng người.", points: { "hightask shortpeople": 3, "shorttask highpeople": 3, "Balancer": 3, "All high": 3 } },
+             { text: "D. Biết cân bằng cả hiệu quả và cảm xúc nhóm.", points: { "hightask shortpeople": 4, "shorttask highpeople": 4, "Balancer": 4, "All high": 4 } },
+            ]},
+
+            { question: "Phong cách bạn muốn khi đi làm là gì?", answers: [
+            { text: "A. Ít áp lực, tự do.", points: { "hightask shortpeople": 1, "shorttask highpeople": 1, "Balancer": 1, "All high": 1 } },
+            { text: "B. Chuyên nghiệp, khắt khe.", points: { "hightask shortpeople": 2, "shorttask highpeople": 2, "Balancer": 2, "All high": 2 } },
+            { text: "C. Thoải mái, nhân văn.", points: { "hightask shortpeople": 3, "shorttask highpeople": 3, "Balancer": 3, "All high": 3 } },
+            { text: "D. Có định hướng và kết nối.", points: { "hightask shortpeople": 4, "shorttask highpeople": 4, "Balancer": 4, "All high": 4 } },
+            ]},
+
+            { question: "Một thành viên làm sai, bạn sẽ làm gì?", answers: [
+            { text: "A. Bỏ qua.", points: { "hightask shortpeople": 1, "shorttask highpeople": 1, "Balancer": 1, "All high": 1 } },
+            { text: "B. Phê bình công khai.", points: { "hightask shortpeople": 2, "shorttask highpeople": 2, "Balancer": 2, "All high": 2 } },
+             { text: "C. Động viên riêng tư.", points: { "hightask shortpeople": 3, "shorttask highpeople": 3, "Balancer": 3, "All high": 3 } },
+            { text: "D. Góp ý và hỗ trợ cải thiện.", points: { "hightask shortpeople": 4, "shorttask highpeople": 4, "Balancer": 4, "All high": 4 } },
+            ]},
+
+            { question: "Khi nhóm thành công, bạn:", answers: [
+            { text: "A. Không phản ứng gì nhiều.", points: { "hightask shortpeople": 1, "shorttask highpeople": 1, "Balancer": 1, "All high": 1, "Team management":1 } },
+            { text: "B. Giao thêm việc mới ngay.", points: { "hightask shortpeople": 2, "shorttask highpeople": 2, "Balancer": 2, "All high": 2, "Team management":2 } },
+            { text: "C. Ăn mừng cùng nhóm.", points: { "hightask shortpeople": 3, "shorttask highpeople": 3, "Balancer": 3, "All high": 3, "Team management":3 } },
+            { text: "D. Khen thưởng + tổng kết rút kinh nghiệm.", points: { "hightask shortpeople": 4, "shorttask highpeople": 4, "Balancer": 4, "All high": 4, "Team management":4  } },
+            ]},
+
+            { question: "Khi nhóm làm việc kém bạn sẽ làm gì?", answers: [
+            { text: "A. Mặc kệ và để thành viên tự chịu trách nhiệm.", points: { "hightask shortpeople": 1, "shorttask highpeople": 1, "Balancer": 1, "All high": 1, "Team management":1  } },
+            { text: "B. Ép buộc tiến độ.", points: { "hightask shortpeople": 2, "shorttask highpeople": 2, "Balancer": 2, "All high": 2, "Team management":2  } },
+            { text: "C. Tìm hiểu lý do, động viên.", points: { "hightask shortpeople": 3, "shorttask highpeople": 3, "Balancer": 3, "All high": 3, "Team management":3 } },
+            { text: "D. Giao lại kế hoạch mới phù hợp định hướng, giải quyết tận gốc vấn đề.", points: { "hightask shortpeople": 4, "shorttask highpeople": 4, "Balancer": 4, "All high": 4, "Team management":4  } },
+            ]},
+
+            { question: "Điều bạn mong muốn từ một nhóm lý tưởng:", answers: [
+            { text: "A. Không ai làm phiền tôi.", points: { "hightask shortpeople": 1, "shorttask highpeople": 1, "Balancer": 1, "All high": 1, "Team management":1 } },
+            { text: "B. Mọi người luôn đạt chỉ tiêu.", points: { "hightask shortpeople": 2, "shorttask highpeople": 2, "Balancer": 2, "All high": 2, "Team management":2 } },
+            { text: "C. Làm việc vui vẻ, thân thiện.", points: { "hightask shortpeople": 3, "shorttask highpeople": 3, "Balancer": 3, "All high": 3, "Team management":3 } },
+            { text: "D. Gắn bó, hiệu suất cao và học hỏi lẫn nhau.", points: { "hightask shortpeople": 4, "shorttask highpeople": 4, "Balancer": 4, "All high": 4, "Team management":4 } },
+            ]},
+        ];
+let currentQuestion = 0;
+let scores = {
+    "hightask shortpeople": 0,
+    "shorttask highpeople": 0,
+    "Balancer": 0,
+    "All high":0,
+    "Team management":0
+};
+
+function startQuiz() {
+    document.getElementById("start-button").style.display = "none";
+    document.getElementById("quiz-container").style.display = "block";
+    showQuestion();
+}
+
+function showQuestion() {
+    if (currentQuestion < questions.length) {
+        const q = questions[currentQuestion];
+        let html = `<h2 style="text-align: left;">${q.question}</h2>`;
+        q.answers.forEach((answer, index) => {
+            html += `<button onclick="selectAnswer(${index})">${answer.text}</button>`;
+        });
+        document.getElementById("quiz-container").innerHTML = html;
+    } else {
+        showResults();
+    }
+}
+
+function selectAnswer(selectedAnswerIndex) {
+    const selectedAnswer = questions[currentQuestion].answers[selectedAnswerIndex];
+    for (const style in selectedAnswer.points) {
+        scores[style] += selectedAnswer.points[style];
+    }
+    currentQuestion++;
+    showQuestion();
+}
+
+function showResults() {
+    let resultText = "";
+    let details = "";
+
+    const hightaskshortpeopleScore = scores["hightask shortpeople"];
+    const shorttaskhighpeopleScore = scores["shorttask highpeople"];
+    const BalancerScore = scores["Balancer"];
+    const AllhighScore = scores["All high"];
+    const TeammanagementScore = scores["Team management"];
+
+
+
+    if (hightaskshortpeopleScore >= 6 && hightaskshortpeopleScore<= 10 ) {
+    resultText = "Phong cách 1.1 Lãnh đạo vô tâm (Impoverished management)";
+    details = `
+<div class="category-details" style="margin-top: 20px; font-family: 'Orbitron', sans-serif; color: #e0f7fa; text-align: left;">
+    <strong>Điểm tổng:</strong> ${hightaskshortpeopleScore} điểm<br>
+    <strong>Đặc điểm:</strong> Không chú trọng đến công việc cũng không quan tâm đến con người.
+    <div style="
+        width: 100%;
+        margin-top: 20px;
+        background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+        border: 2px solid #00f0ff;
+        border-radius: 20px 5px 20px 5px;
+        box-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+        overflow: hidden;
+    ">
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr style="background-color: #00bcd4; color: #003b4d;">
+                    <th style="padding: 16px; text-align: center; border-right: 1px solid #00f0ff; width: 50%;">Ưu điểm</th>
+                    <th style="padding: 16px; text-align: center; width: 50%;">Nhược điểm</th>
+                </tr>
+            </thead>
+            <tbody style="background-color: rgba(255, 255, 255, 0.05);">
+                <tr>
+                    <td style="padding: 16px; border-right: 1px solid #00f0ff;">
+                        <ul style="padding-left: 20px; margin: 0;">
+                            <li>Để nhóm tự chủ hoàn toàn, không can thiệp sâu.</li>
+                            <li>Giảm áp lực cho người lãnh đạo và thành viên.</li>
+                        </ul>
+                    </td>
+                    <td style="padding: 16px;">
+                        <ul style="padding-left: 20px; margin: 0;">
+                            <li>Thiếu định hướng, nhóm dễ mất mục tiêu.</li>
+                            <li>Không tạo ra động lực làm việc hay sự kết nối nội bộ.</li>
+                            <li>Dễ khiến hiệu suất giảm sút nghiêm trọng.</li>
+                          <li>Không phù hợp trong môi trường cần sự gắn kết hoặc hiệu quả cao.</li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>`;
+} else if (shorttaskhighpeopleScore >= 11  && shorttaskhighpeopleScore <= 13 ) {
+    resultText = "Lãnh đạo chuyên quyền (Authority-compliance management)";
+    details = `
+<div class="category-details" style="margin-top: 20px; font-family: 'Orbitron', sans-serif; color: #e0f7fa; text-align: left;">
+    <strong>Điểm tổng:</strong> ${shorttaskhighpeopleScore} điểm<br>
+    <strong>Đặc điểm:</strong> Chú trọng tối đa vào hiệu quả công việc, coi nhẹ yếu tố con người.
+    <div style="
+        width: 100%;
+        margin-top: 20px;
+        background: linear-gradient(135deg, #1b2735, #090a0f);
+        border: 2px solid #00f0ff;
+        border-radius: 5px 20px 5px 20px;
+        box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+        overflow: hidden;
+    ">
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr style="background-color: #29b6f6; color: #002b36;">
+                    <th style="padding: 16px; text-align: center; border-right: 1px solid #00f0ff; width: 50%;">Ưu điểm</th>
+                    <th style="padding: 16px; text-align: center; width: 50%;">Nhược điểm</th>
+                </tr>
+            </thead>
+            <tbody style="background-color: rgba(255, 255, 255, 0.05);">
+                <tr>
+                    <td style="padding: 16px; border-right: 1px solid #00f0ff;">
+                        <ul style="padding-left: 20px; margin: 0;">
+                            <li>Nâng cao hiệu suất và tốc độ hoàn thành nhiệm vụ.</li>
+                            <li>Đảm bảo nhóm đạt chỉ tiêu, tiến độ rõ ràng.</li>
+                            <li>Phù hợp với môi trường làm việc có cấu trúc chặt chẽ, áp lực cao.</li>
+                        </ul>
+                    </td>
+                    <td style="padding: 16px;">
+                        <ul style="padding-left: 20px; margin: 0;">
+                            <li>Gây căng thẳng và dễ khiến thành viên kiệt sức hoặc mất động lực.</li>
+                            <li>Thiếu sự lắng nghe và tôn trọng cảm xúc cá nhân.</li>
+                            <li>Có thể dẫn đến xung đột và rạn nứt nội bộ nếu duy trì lâu dài.</li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>`;
+} else if (BalancerScore >= 14 && BalancerScore <= 16 ) {
+    resultText = "Phong cách 9.1 Lãnh đạo xã hội (Country club management)";
+    details = `
+<div class="category-details" style="margin-top: 20px; font-family: 'Orbitron', sans-serif; color: #e0f7fa; text-align: left;">
+    <strong>Điểm tổng:</strong> ${BalancerScore} điểm<br>
+    <strong>Đặc điểm:</strong> Quan tâm sâu sắc đến con người, xem nhẹ khía cạnh công việc.
+    <div style="
+        width: 100%;
+        margin-top: 20px;
+        background: linear-gradient(135deg, #1b2735, #090a0f);
+        border: 2px solid #00f0ff;
+        border-radius: 5px 20px 5px 20px;
+        box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+        overflow: hidden;
+    ">
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr style="background-color: #29b6f6; color: #002b36;">
+                    <th style="padding: 16px; text-align: center; border-right: 1px solid #00f0ff; width: 50%;">Ưu điểm</th>
+                    <th style="padding: 16px; text-align: center; width: 50%;">Nhược điểm</th>
+                </tr>
+            </thead>
+            <tbody style="background-color: rgba(255, 255, 255, 0.05);">
+                <tr>
+                    <td style="padding: 16px; border-right: 1px solid #00f0ff;">
+                        <ul style="padding-left: 20px; margin: 0;">
+                            <li>Tạo môi trường làm việc thoải mái, thân thiện.</li>
+                            <li>Xây dựng mối quan hệ gần gũi, gắn bó trong nhóm.</li>
+                            <li>Giúp thành viên cảm thấy được thấu hiểu và hỗ trợ.</li>
+                        </ul>
+                    </td>
+                    <td style="padding: 16px;">
+                        <ul style="padding-left: 20px; margin: 0;">
+                            <li>Dễ dẫn đến thiếu kỷ luật và hiệu suất làm việc thấp.</li>
+                            <li>Không đảm bảo tiến độ và chất lượng công việc khi thiếu kiểm soát.</li>
+                            <li>Lạm dụng sự cảm thông có thể làm giảm năng lực tổ chức.</li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>`;
+} else if (AllhighScore >= 17  && AllhighScore <= 20 ) {
+    resultText = "Phong cách 5.5 Lãnh đạo cân bằng (Middle-of-the-road management)";
+    details = `
+<div class="category-details" style="margin-top: 20px; font-family: 'Orbitron', sans-serif; color: #e0f7fa; text-align: left;">
+    <strong>Điểm tổng:</strong> ${AllhighScore} điểm<br>
+    <strong>Đặc điểm:</strong> Cân bằng mức trung bình giữa hiệu quả công việc và quan tâm con người.
+    <div style="
+        width: 100%;
+        margin-top: 20px;
+        background: linear-gradient(135deg, #232526, #414345);
+        border: 2px solid #00f0ff;
+        border-radius: 20px 5px 20px 5px;
+        box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+        overflow: hidden;
+    ">
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr style="background-color: #4fc3f7; color: #003b4d;">
+                    <th style="padding: 16px; text-align: center; border-right: 1px solid #00f0ff; width: 50%;">Ưu điểm</th>
+                    <th style="padding: 16px; text-align: center; width: 50%;">Nhược điểm</th>
+                </tr>
+            </thead>
+            <tbody style="background-color: rgba(255, 255, 255, 0.05);">
+                <tr>
+                    <td style="padding: 16px; border-right: 1px solid #00f0ff;">
+                        <ul style="padding-left: 20px; margin: 0;">
+                            <li>Đảm bảo nhóm vận hành ổn định, không căng thẳng quá mức.</li>
+                            <li>Giữ được sự hài hòa, không có xung đột nghiêm trọng.</li>
+                            <li>Dễ áp dụng trong các tổ chức có cơ cấu ổn định.</li>
+                        </ul>
+                    </td>
+                    <td style="padding: 16px;">
+                        <ul style="padding-left: 20px; margin: 0;">
+                            <li>Thiếu sự đột phá trong kết quả.</li>
+                            <li>Không tối ưu hóa tiềm năng con người hay công việc.</li>
+                            <li>Có thể tạo cảm giác “an toàn giả” khiến nhóm không tiến bộ.</li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>`;
+} else if (TeammanagementScore >= 21 && TeammanagementScore <= 24  ) {
+    resultText = "Phong cách 9.9 Lãnh đạo lý tưởng (Team management)";
+    details = `
+<div class="category-details" style="margin-top: 20px; font-family: 'Orbitron', sans-serif; color: #e0f7fa; text-align: left;">
+    <strong>Điểm tổng:</strong> ${TeammanagementScore} điểm<br>
+    <strong>Đặc điểm:</strong> Kết hợp hiệu quả cao về công việc và mức độ quan tâm cao đến con người.
+    <div style="
+        width: 100%;
+        margin-top: 20px;
+        background: linear-gradient(135deg, #1b2735, #090a0f);
+        border: 2px solid #00f0ff;
+        border-radius: 5px 20px 5px 20px;
+        box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+        overflow: hidden;
+    ">
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr style="background-color: #29b6f6; color: #002b36;">
+                    <th style="padding: 16px; text-align: center; border-right: 1px solid #00f0ff; width: 50%;">Ưu điểm</th>
+                    <th style="padding: 16px; text-align: center; width: 50%;">Nhược điểm</th>
+                </tr>
+            </thead>
+            <tbody style="background-color: rgba(255, 255, 255, 0.05);">
+                <tr>
+                    <td style="padding: 16px; border-right: 1px solid #00f0ff;">
+                        <ul style="padding-left: 20px; margin: 0;">
+                            <li>Tối ưu cả năng suất và sự phát triển cá nhân.</li>
+                            <li>Xây dựng đội ngũ bền vững, gắn kết và chủ động.</li>
+                            <li>Tạo điều kiện cho sáng tạo, học hỏi và đổi mới liên tục.</li>
+                        </ul>
+                    </td>
+                    <td style="padding: 16px;">
+                        <ul style="padding-left: 20px; margin: 0;">
+                            <li>Yêu cầu cao về kỹ năng lãnh đạo, quản trị cảm xúc và chiến lược.</li>
+                            <li>Tốn thời gian để xây dựng và duy trì hệ thống hoạt động hiệu quả.</li>
+                            <li>Phụ thuộc vào sự hợp tác chủ động từ tất cả thành viên trong nhóm.</li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>`;
+} else {
+    resultText = "Chưa xác định";
+    details = "<div style='color: white;'>Không đủ dữ liệu để xác định phong cách lãnh đạo của bạn.</div>";
+}
+
+document.getElementById("quiz-container").innerHTML = `
+<h2 style="font-size: 24px; font-family: 'Orbitron', sans-serif; color: #00f0ff; text-align: left;">
+Bạn phù hợp với nhóm: 
+<span style="font-weight: bold; color: #ff4757;">${resultText}</span>
+</h2>        
+${details}
+`;}
+    </script>
+</body>
+</html>
