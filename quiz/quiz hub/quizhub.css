@@ -105,7 +105,7 @@ body::-webkit-scrollbar{
   margin: 10px 0 10px 0;
 }
 
-.card-text a{
+.link_card{
   color: #FDF6EC;
   text-decoration: none;
 }
