@@ -1355,7 +1355,108 @@
                     </div>
                 <div class="pagination"></div>
             </div>
-        </section>        
+        </section>  
+        
+        
+<!-- Live chat -->
+<div class="messenger-wrapper">
+    <a href="https://m.me/102053039268859" target="_blank" class="messenger-link">
+      <img src="/images/messenger-icon.png" alt="Chat trên Messenger" width="50">
+      <i class="fab fa-facebook-messenger"></i>
+      <span class="tooltip">Nhắn tin cho chúng tôi tại đây!</span>
+    </a>
+  </div>
+  
+  <style>
+  .messenger-wrapper {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 1000;
+  }
+  
+  .messenger-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+    box-shadow: 0 4px 12px rgba(3, 101, 199, 0.3);
+    transition: all 0.3s ease;
+    position: relative;
+    animation: pulse 2s infinite;
+  }
+  
+  .messenger-link:hover {
+    transform: scale(1.1) translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 132, 255, 0.5);
+    animation: none;
+  }
+  
+  .messenger-link i {
+    color: white;
+    font-size: 28px;
+  }
+  
+  .tooltip {
+    position: absolute;
+    right: 75px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(68, 202, 255, 0.8);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: Arial;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+    white-space: nowrap;
+  }
+  
+  .tooltip::after {
+    content: "";
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent transparent rgba(68, 202, 255, 0.8);
+  }
+  
+  .messenger-link:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+    right: 85px;
+  }
+  
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+  
+  /* Responsive cho mobile */
+  @media (max-width: 768px) {
+    .messenger-wrapper {
+      bottom: 20px;
+      right: 20px;
+    }
+    
+    .messenger-link {
+      width: 50px;
+      height: 50px;
+    }
+    
+    .messenger-link i {
+      font-size: 24px;
+    }
+  }
+  </style>
+  
     </main>
     <footer class="footer-ss2">
         <div class="footer-container">
